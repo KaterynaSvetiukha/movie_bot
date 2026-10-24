@@ -2,14 +2,18 @@ import asyncio
 from aiogram import Bot, Dispatcher, html
 from aiogram.types import Message
 from config import TOKEN_BOT
-from aiogram.filters import Command
+from commands import START_COMMAND, FILMS_COMMAND
 
 dp = Dispatcher()
 
-@dp.message(Command("start"))
+@dp.message(START_COMMAND)
 async def start_handler(message: Message) -> None:
     user_name = message.from_user.full_name
     await message.answer(f'Вітаю, {html.bold(user_name)} :)')
+
+@dp.message(FILMS_COMMAND)
+async def films_handler(message: Message) -> None:
+    await message.answer('Я не вмію реалізовувати таку команду')
 
 @dp.message()
 async def echo_handler(message: Message) -> None:
